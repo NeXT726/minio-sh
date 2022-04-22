@@ -1,0 +1,1 @@
+rm -rf /mnt/disk1/minio/data$1/.minio.sys/ /mnt/disk1/minio/data$1/djl-test/
