@@ -1,0 +1,3 @@
+该仓库是使用cosbench测试minio的脚本文件
+cosbench使用的xml测试配置文件来源于师兄的脚本@hsk
+clean.sh文件清空minio的本地目录（minio运行后会在数据目录下生成隐藏文件）
