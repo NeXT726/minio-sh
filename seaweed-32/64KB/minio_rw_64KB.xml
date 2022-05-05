@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<workload name="rw_64KB" description="sample benchmark for s3">
+
+  <storage type="s3" config="accesskey=any;secretkey=anyanyany;endpoint=http://10.10.1.32:8333/djl-test/" />
+
+  <workflow>
+
+    <workstage name="init">
+      <work type="init" workers="1" config="cprefix=s3testqwer;containers=r(1,2)" />
+    </workstage>
+
+    <workstage name="prepare">
+      <work type="prepare" workers="1" config="cprefix=s3testqwer;containers=r(1,2);objects=r(1,100);sizes=c(64)KB" />
+    </workstage>
+
+    <workstage name="main_rd">
+      <work name="main" workers="64" runtime="300">
+        <operation type="read" ratio="100" config="cprefix=s3testqwer;containers=u(1,2);objects=u(1,100)" />
+      </work>
+    </workstage>
+
+    <workstage name="main_wr">
+      <work name="main" workers="64" runtime="300">
+        <operation type="write" ratio="100" config="cprefix=s3testqwer;containers=u(1,2);objects=u(101,200);sizes=c(64)KB" />
+      </work>
+    </workstage>
+
+    <workstage name="cleanup">
+      <work type="cleanup" workers="1" config="cprefix=s3testqwer;containers=r(1,2);objects=r(1,200)" />
+    </workstage>
+
+    <workstage name="dispose">
+      <work type="dispose" workers="1" config="cprefix=s3testqwer;containers=r(1,2)" />
+    </workstage>
+
+  </workflow>
+</workload>
